@@ -129,13 +129,6 @@ mint(WALLET_ADDRESS, ...)
 
 transfer(інший_адрес, ...)
 
-Після цього в UI з’явиться історія, і графік матиме точки.
-
-sql
-Копировать код
-
-После вставки — в терминале (PowerShell) сделай:
-
 ```powershell
 git add README.md
 git commit -m "Update README (UA)"
