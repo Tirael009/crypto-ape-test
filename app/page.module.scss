@@ -1,0 +1,72 @@
+.main {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1920px;
+}
+
+.errorBox {
+  margin-bottom: 1.5rem;
+  border: 1px solid #fecaca;
+  border-radius: 1rem;
+  background: #fef2f2;
+  padding: 1rem;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}
+
+.errorTitle {
+  font-weight: 400;
+}
+
+.errorMessage {
+  margin-top: 0.25rem;
+}
+
+.errorCode {
+  font-family: var(--font-geist-mono), "Segoe UI", monospace;
+}
+
+.errorHint {
+  margin-top: 0.5rem;
+  color: rgba(185, 28, 28, 0.8);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 0.8rem;
+}
+
+.cardsGrid > * {
+  height: 100%;
+}
+
+@media (min-width: 640px) {
+  .main {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding: 2rem;
+  }
+}
+

@@ -1,0 +1,42 @@
+.chartRoot {
+  position: relative;
+  height: 118px;
+}
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(1px);
+}
+
+.loadingText {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.tooltip {
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: #fff;
+  padding: 0.35rem 0.55rem;
+  box-shadow: 0 8px 16px rgba(20, 14, 10, 0.12);
+}
+
+.tooltipTime {
+  color: var(--muted);
+  font-size: 0.62rem;
+}
+
+.tooltipValue {
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+

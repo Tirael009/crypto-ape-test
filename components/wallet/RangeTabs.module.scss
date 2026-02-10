@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2rem;
+}
+
+.tabButton {
+  position: relative;
+  display: inline-flex;
+  min-width: 34px;
+  overflow: hidden;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  padding: 0.24rem 0.46rem;
+  color: var(--muted-strong);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  outline: none;
+}
+
+.tabButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.activePill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(240, 100, 35, 0.16);
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+}
+
+.labelActive {
+  color: var(--primary);
+  font-weight: 400;
+}
+
