@@ -1,91 +1,142 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # crypto-ape-test
-тестове завдання
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-=======
-# Crypto Wallet Dashboard (Next.js + TypeScript)
->>>>>>> c264460 (Submit test assignment)
 
-Дашборд из 2 блоков:
-- `My Wallet` (баланс, депозит, вывод USDC)
-- `Profit/Loss` (интерактивный график c range tabs)
+Тестове завдання: **Wallet Dashboard** (2 блоки) за макетом.
 
-## Технологии
-- Next.js (App Router)
-- TypeScript only
-- `@number-flow/react` для анимированных значений
-- `framer-motion` для `whileHover` / `whileDrag` анимаций кнопок
-- Etherscan API (история транзакций/депозитов и данных для PnL)
-- Server Actions для всех запросов
+Екран складається з:
+- **My Wallet** — баланс, депозит (адреса), вивід (withdraw)
+- **Profit / Loss** — інтерактивний графік з перемиканням діапазону
 
-## Быстрый старт
-1. Создай `.env.local` на основе `.env.example`.
-2. Установи зависимости:
+---
+
+## Що тут зроблено
+
+- Next.js (App Router) + **TypeScript only**
+- Анімовані значення через **NumberFlow**
+- Анімації кнопок через **framer-motion** (`whileHover`, `whileDrag`)
+- Дані по транзакціях/історії через **Etherscan API**
+- **Всі запити тільки через Server Actions**
+- Розділення server/client компонентів
+- Серверний кеш результатів на **60 секунд** (з прив’язкою до `publicKey`)
+
+---
+
+## Технології
+
+- Next.js 16 (App Router)
+- TypeScript
+- `@number-flow/react`
+- `framer-motion`
+- `ethers`
+- Etherscan API
+
+---
+
+## Як запустити локально
+
+1) Встановити залежності:
+
 ```bash
 npm install
-```
-3. Запусти:
-```bash
-npm run dev
-```
-4. Открой `http://localhost:3000`.
-5. Для просмотра любого кошелька по публичному ключу открой `http://localhost:3000/?publicKey=0x...`.
+Створити .env.local на основі .env.example:
 
-## Обязательные env
-```env
+bash
+Копировать код
+cp .env.example .env.local
+# або вручну створити файл .env.local
+Запустити dev сервер:
+
+bash
+Копировать код
+npm run dev
+Відкрити: http://localhost:3000
+
+Перегляд іншого гаманця
+Можна передати адресу через query-параметр:
+
+ruby
+Копировать код
+http://localhost:3000/?publicKey=0x...
+Якщо publicKey не передано — використовується WALLET_ADDRESS з .env.local.
+
+ENV змінні (обов’язково)
+Важливо: .env.local не комітиться. У репозиторії є лише .env.example.
+
+env
+Копировать код
 CHAIN_ID=11155111
-RPC_URL=...
-WALLET_ADDRESS=0x...
-WALLET_PRIVATE_KEY=0x...
-USDC_ADDRESS=0x...
+
+# Sepolia RPC (Infura/Alchemy/QuickNode або інший провайдер)
+RPC_URL=
+
+# Гаманець, з якого робиться withdraw (server-side signer)
+WALLET_ADDRESS=
+WALLET_PRIVATE_KEY=
+
+# USDC mock контракт (Sepolia), decimals = 6
+USDC_ADDRESS=
 USDC_DECIMALS=6
-TRACKED_TOKEN_ADDRESS=0x...
+
+# Токен для Profit/Loss (по ТЗ: НЕ USDC)
+TRACKED_TOKEN_ADDRESS=
 TRACKED_TOKEN_DECIMALS=18
 TRACKED_TOKEN_PRICE_USD=1
-ETHERSCAN_API_KEY=...
+
+# Etherscan
+ETHERSCAN_API_KEY=
 ETHERSCAN_API_URL=https://api.etherscan.io/v2/api
 ETHERSCAN_BASE_URL=https://sepolia.etherscan.io
-```
+Перевірка функціоналу (smoke test)
+1) Deposit
+Натисни Deposit
 
-## Что реализовано
-- Рабочий `withdraw` USDC через server action + проверка `balanceOf` до `transfer`.
-- Проверка безопасности: `WALLET_PRIVATE_KEY` обязан соответствовать `WALLET_ADDRESS`.
-- `withdraw` возвращает понятные ошибки (`invalid recipient`, `same as sender`, `insufficient USDC`, `invalid amount`) без 500.
-- `deposit` через адрес кошелька + загрузка последних депозитов из Etherscan.
-- PnL без USDC на основе истории `TRACKED_TOKEN_ADDRESS` с server cache 60 сек.
-- Кэш и загрузка данных привязаны к `publicKey` (или `WALLET_ADDRESS` по умолчанию).
-- Понятные статусы в UI: `Invalid Etherscan API key`, `No token history for tracked token`.
-- Hover по графику меняет верхнее значение и подпись времени.
-- Все запросы идут через server actions, client/server компоненты разделены.
+Скопіюй адресу
 
-<<<<<<< HEAD
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Поповни її тестовими токенами (через Remix / faucet / будь-який тестовий переказ)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Онови сторінку → у списку транзакцій мають з’явитися incoming tx
 
-## Learn More
+Deposit у цьому завданні — це показ адреси + історія депозитів (без інтеграції з MetaMask), щоб тримати підхід “server actions only”.
 
-To learn more about Next.js, take a look at the following resources:
+2) Withdraw
+Введи адресу отримувача (інший тестовий адрес)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Вкажи суму меншу за баланс
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Натисни Withdraw
 
-## Deploy on Vercel
+Має повернутися tx hash + посилання на explorer (ETHERSCAN_BASE_URL)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3) Profit/Loss графік
+Перемикай 1H / 6H / 1D — дані мають оновлюватись
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 81831fe (Initial commit from Create Next App)
-=======
-## Remix Smoke (5-7 шагов)
-1. Открой контракт `USDC_ADDRESS` в Remix на сети Sepolia и вызови `mint(WALLET_ADDRESS, 1000000000)` для 1000 USDC (6 decimals).
-2. На том же контракте вызови `transfer(<любой_другой_адрес>, 1000000)` для 1 USDC.
-3. Открой контракт `TRACKED_TOKEN_ADDRESS` и вызови `mint(WALLET_ADDRESS, 1000000000)` (для текущего tracked токена с 6 decimals).
-4. На tracked контракте вызови `transfer(<любой_другой_адрес>, 1000000)`.
-5. Подожди 10-30 секунд, обнови UI и переключи `1H/6H/1D` — график должен иметь точки.
-6. В `Withdraw` введи валидный адрес и сумму меньше баланса — должен появиться tx hash и ссылка на `sepolia.etherscan.io`.
->>>>>>> c264460 (Submit test assignment)
+Наведи курсор на графік — зверху має змінюватися дата/час і значення (NumberFlow)
+
+Якщо графік “плоский” або по нулях — це нормально, коли немає історії транзакцій для TRACKED_TOKEN_ADDRESS на цьому гаманці або невалідний ETHERSCAN_API_KEY.
+
+Примітки
+Є перевірка безпеки: WALLET_PRIVATE_KEY має відповідати WALLET_ADDRESS.
+
+TRACKED_TOKEN_ADDRESS за ТЗ має бути не USDC.
+
+Кеш на сервері — 60 сек, щоб не робити зайвих запитів до Etherscan.
+
+Контракти для локального тесту (через Remix)
+Якщо треба швидко нагенерити тестові транзакції:
+
+Задеплоїти mock ERC20 у Sepolia (типу MockUSDC.sol / MockABC.sol)
+
+mint(WALLET_ADDRESS, ...)
+
+transfer(інший_адрес, ...)
+
+Після цього в UI з’явиться історія, і графік матиме точки.
+
+sql
+Копировать код
+
+После вставки — в терминале (PowerShell) сделай:
+
+```powershell
+git add README.md
+git commit -m "Update README (UA)"
+git push
