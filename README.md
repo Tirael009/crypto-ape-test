@@ -9,7 +9,6 @@
 ---
 
 ## Що тут зроблено
-
 - Next.js (App Router) + **TypeScript only**
 - Анімовані значення через **NumberFlow**
 - Анімації кнопок через **framer-motion** (`whileHover`, `whileDrag`)
@@ -21,7 +20,6 @@
 ---
 
 ## Технології
-
 - Next.js 16 (App Router)
 - TypeScript
 - `@number-flow/react`
@@ -34,7 +32,6 @@
 ## Як запустити локально
 
 1) Встановити залежності:
-
 ```bash
 npm install
 Створити .env.local на основі .env.example:
@@ -53,7 +50,7 @@ npm run dev
 Перегляд іншого гаманця
 Можна передати адресу через query-параметр:
 
-ruby
+txt
 Копировать код
 http://localhost:3000/?publicKey=0x...
 Якщо publicKey не передано — використовується WALLET_ADDRESS з .env.local.
@@ -113,14 +110,6 @@ Deposit у цьому завданні — це показ адреси + іст
 
 Якщо графік “плоский” або по нулях — це нормально, коли немає історії транзакцій для TRACKED_TOKEN_ADDRESS на цьому гаманці або невалідний ETHERSCAN_API_KEY.
 
-Примітки
-Є перевірка безпеки: WALLET_PRIVATE_KEY має відповідати WALLET_ADDRESS.
-
-TRACKED_TOKEN_ADDRESS за ТЗ має бути не USDC.
-
-Кеш на сервері — 60 сек, щоб не робити зайвих запитів до Etherscan.
-
-Контракти для локального тесту (через Remix)
 Якщо треба швидко нагенерити тестові транзакції:
 
 Задеплоїти mock ERC20 у Sepolia (типу MockUSDC.sol / MockABC.sol)
@@ -128,3 +117,5 @@ TRACKED_TOKEN_ADDRESS за ТЗ має бути не USDC.
 mint(WALLET_ADDRESS, ...)
 
 transfer(інший_адрес, ...)
+
+Після цього в UI з’явиться історія, і графік матиме точки.
