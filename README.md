@@ -128,8 +128,3 @@ TRACKED_TOKEN_ADDRESS за ТЗ має бути не USDC.
 mint(WALLET_ADDRESS, ...)
 
 transfer(інший_адрес, ...)
-
-```powershell
-git add README.md
-git commit -m "Update README (UA)"
-git push
